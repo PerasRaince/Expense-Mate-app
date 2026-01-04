@@ -1,16 +1,107 @@
-# React + Vite
+# Expense Mate
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Expense Mate is a mobile-first expense and task management application built with React and Vite, designed with an iOS-style glassmorphism UI and packaged as a fullscreen Android app using Trusted Web Activity (TWA).
 
-Currently, two official plugins are available:
+This project focuses on simplicity, offline usage, smooth interactions, and a native-app feel without a backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Expense Mate helps users track daily expenses and manage scheduled tasks in a single lightweight application.  
+All data is stored locally on the device, ensuring privacy, speed, and offline availability.
 
-## Expanding the ESLint configuration
+The interface adapts automatically to system light and dark themes and is optimized for touch-based mobile usage.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Core Features
+
+### Expense Tracking
+- Add expenses with predefined categories and a custom option
+- Automatic date and time logging
+- Expenses stored in local storage (persistent on reload)
+- View totals grouped by:
+  - Today
+  - Week
+  - Month
+  - Year
+- Newest expenses appear at the top
+- Smooth scrolling between summary sections
+- Clean stacked list layout for better readability
+
+### Task Scheduler (To-Do)
+- Create tasks with specific date and time
+- Priority levels with visual indicators
+- Mark tasks as completed (faded appearance)
+- Reschedule tasks using a modal popup
+- Completed tasks are automatically removed after 21 days
+- Notification support using the Web Notifications API
+
+---
+
+## User Interface
+
+- iOS-inspired glassmorphism design
+- Smooth transitions and subtle animations
+- Bottom navigation for switching between Expense and To-Do views
+- Swipe gestures for quick navigation
+- Responsive layout optimized for mobile screens
+- Automatic light and dark mode based on system settings
+
+---
+
+## Technology Stack
+
+- React
+- Vite
+- Modern CSS (Glassmorphism UI)
+- LocalStorage for persistence
+- Web Notifications API
+- Trusted Web Activity (Android)
+
+---
+
+## Data & Privacy
+
+- No backend
+- No external database
+- No cloud sync
+- All data is stored locally on the user’s device
+- Fully offline capable
+
+---
+
+## Installation & Development
+
+### Requirements
+- Node.js (LTS)
+- npm
+- Git
+
+### Run Locally
+```bash
+npm install
+npm run dev
+
+
+
+
+
+
+Project Structure
+
+
+college-expense-tracker/
+│
+├─ src/
+│  ├─ components/
+│  ├─ App.jsx
+│  ├─ main.jsx
+│  └─ index.css
+│
+├─ index.html
+├─ package.json
+└─ README.md
+
+
