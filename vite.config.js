@@ -16,7 +16,7 @@ export default defineConfig({
         theme_color: "#0f172a",
         icons: [
           {
-            src: "/icons/vitr.png",
+            src: "/icons/vite.png",
             sizes: "192x192",
             type: "image/png",
             purpose: "any"
