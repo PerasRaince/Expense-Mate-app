@@ -14,11 +14,14 @@ const formatDate = (d) =>
     month: "short"
   });
 
-export default function ExpenseList({ expenses, refs, active }) {
+export default function ExpenseList({ expenses, refs, active, searchQuery, searchResults }) {
   const now = new Date();
 
+  // Use search results if available, otherwise use all expenses
+  const expensesToShow = searchResults && searchResults.expenses ? searchResults.expenses : expenses;
+
   // Sort newest first
-  const sorted = [...expenses].sort(
+  const sorted = [...expensesToShow].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 
@@ -47,7 +50,7 @@ export default function ExpenseList({ expenses, refs, active }) {
         <section ref={refs.today}>
           <h3>Today</h3>
           {today.map((e, i) => (
-            <Item key={i} e={e} showDate />
+            <Item key={i} e={e} showDate searchQuery={searchQuery} />
           ))}
         </section>
       )}
@@ -59,7 +62,7 @@ export default function ExpenseList({ expenses, refs, active }) {
           {Object.entries(
             groupBy(week, e => formatDate(e.date))
           ).map(([day, list]) => (
-            <Group key={day} title={day} list={list} />
+            <Group key={day} title={day} list={list} searchQuery={searchQuery} />
           ))}
         </section>
       )}
@@ -78,7 +81,7 @@ export default function ExpenseList({ expenses, refs, active }) {
               {Object.entries(
                 groupBy(list, e => formatDate(e.date))
               ).map(([day, items]) => (
-                <Group key={day} title={day} list={items} />
+                <Group key={day} title={day} list={items} searchQuery={searchQuery} />
               ))}
             </div>
           ))}
@@ -101,7 +104,7 @@ export default function ExpenseList({ expenses, refs, active }) {
               {Object.entries(
                 groupBy(list, e => formatDate(e.date))
               ).map(([day, items]) => (
-                <Group key={day} title={day} list={items} />
+                <Group key={day} title={day} list={items} searchQuery={searchQuery} />
               ))}
             </div>
           ))}
@@ -111,22 +114,36 @@ export default function ExpenseList({ expenses, refs, active }) {
   );
 }
 
-function Group({ title, list }) {
+function Group({ title, list, searchQuery }) {
   return (
     <div className="glass-card">
       <h5>{title}</h5>
       {list.map((e, i) => (
-        <Item key={i} e={e} />
+        <Item key={i} e={e} searchQuery={searchQuery} />
       ))}
     </div>
   );
 }
 
-function Item({ e, showDate }) {
+function Item({ e, showDate, searchQuery }) {
+  // Highlight search terms in the item name
+  const highlightText = (text, query) => {
+    if (!query || !text) return text;
+    
+    const regex = new RegExp(`(${query})`, 'gi');
+    const parts = text.split(regex);
+    
+    return parts.map((part, index) => 
+      regex.test(part) ? (
+        <mark key={index} className="search-highlight">{part}</mark>
+      ) : part
+    );
+  };
+
   return (
     <div className="stack-item">
       <div>
-        <div>{e.item}</div>
+        <div>{highlightText(e.item, searchQuery)}</div>
         {showDate && (
           <small style={{ opacity: 0.6 }}>
             {new Date(e.date).toLocaleTimeString([], {

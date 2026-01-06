@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Storage Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>CampusWal Storage Test</h1>
+    <div id="output"></div>
+    
+    <script type="module">
+        import { storage } from './src/utils/storage.js';
+        
+        const output = document.getElementById('output');
+        
+        async function testStorage() {
+            try {
+                output.innerHTML += '<p>🔄 Testing storage system...</p>';
+                
+                // Get storage info
+                const info = await storage.getStorageInfo();
+                output.innerHTML += `<p>📱 Storage Type: ${info.type}</p>`;
+                output.innerHTML += `<p>📂 Location: ${info.location}</p>`;
+                
+                // Test permissions
+                const permissions = await storage.requestPermissions();
+                output.innerHTML += `<p>🔐 Permissions: ${permissions.granted ? '✅ Granted' : '❌ Denied'}</p>`;
+                
+                // Test saving data
+                const testExpenses = [
+                    { id: 1, amount: 25.50, category: 'Food', date: Date.now() },
+                    { id: 2, amount: 15.00, category: 'Transport', date: Date.now() }
+                ];
+                
+                await storage.saveExpenses(testExpenses);
+                output.innerHTML += '<p>💾 Test expenses saved</p>';
+                
+                // Test loading data
+                const loadedExpenses = await storage.loadExpenses();
+                output.innerHTML += `<p>📂 Loaded ${loadedExpenses.length} expenses</p>`;
+                
+                output.innerHTML += '<p>✅ Storage test completed successfully!</p>';
+                
+            } catch (error) {
+                output.innerHTML += `<p>❌ Error: ${error.message}</p>`;
+                console.error('Storage test error:', error);
+            }
+        }
+        
+        testStorage();
+    </script>
+</body>
+</html>

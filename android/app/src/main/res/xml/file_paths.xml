@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Internal storage -->
+    <files-path name="files" path="." />
+    
+    <!-- External storage -->
+    <external-files-path name="external_files" path="." />
+    
+    <!-- Documents directory -->
+    <external-path name="external_storage_root" path="." />
+    
+    <!-- App-specific external storage -->
+    <external-files-path name="app_external_files" path="CampusWal" />
+    
+    <!-- Cache directory -->
+    <cache-path name="cache" path="." />
+</paths>

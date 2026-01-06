@@ -1,0 +1,6 @@
+{
+  "appId": "com.peras.campuswal",
+  "appName": "CampusWal",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
